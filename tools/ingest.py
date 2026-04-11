@@ -35,7 +35,7 @@ from flask import Flask, jsonify, redirect, render_template_string, request, sen
 from PIL import Image, ImageOps, ExifTags
 
 
-SUPPORTED_EXTS = {".jpg", ".jpeg", ".png", ".tif", ".tiff"}
+SUPPORTED_EXTS = {".jpg", ".jpeg", ".jpeg", ".png", ".tif", ".tiff"}
 
 DEFAULT_THUMB_LONG_EDGE = 450
 DEFAULT_DISPLAY_LONG_EDGE = 2000

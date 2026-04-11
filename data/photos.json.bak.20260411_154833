@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-04-11T19:48:33Z",
+  "generatedAt": "2026-04-11T19:48:28Z",
   "photos": [
     {
       "id": "2024-08-23_000048890004",
@@ -26769,46 +26769,6 @@
         "digital",
         "icp-class",
         "color"
-      ]
-    },
-    {
-      "id": "2026-04-07_dscf5462",
-      "source": {
-        "originalFilename": "DSCF5462.jpeg",
-        "hash": "f33730b1cb43b551d903e2c25d4e7f5e18c004dd950a2d74d34a3537bddbe1eb",
-        "hashSource": "original",
-        "sizeBytes": 3782173,
-        "mtime": 1775935619,
-        "fingerprint": "size:3782173_mtime:1775935619",
-        "originalPathHint": "/Users/dhananjaynarayanan/originalPhotos/DSCF5462.jpeg",
-        "importedAt": "2026-04-11T19:45:57Z"
-      },
-      "paths": {
-        "thumb": "assets/thumbs/2026-04-07_dscf5462.jpg",
-        "display": "assets/display/2026-04-07_dscf5462.jpg",
-        "original": null
-      },
-      "exif": {
-        "dateTaken": "2026-04-07T20:06:13",
-        "cameraMake": "FUJIFILM",
-        "cameraModel": "X-T20",
-        "lensModel": null,
-        "exposureTime": null,
-        "fNumber": null,
-        "iso": null,
-        "focalLength": null
-      },
-      "meta": {
-        "title": null,
-        "caption": null,
-        "location": null
-      },
-      "tags": [
-        "x-t20",
-        "nyc",
-        "digital",
-        "icp-class",
-        "bw"
       ]
     }
   ]
