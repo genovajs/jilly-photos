@@ -1,46 +1,43 @@
 const PHOTOS_URL = "data/photos.json";
-const TAGS_URL = "data/tags.json";
+const TAGS_URL   = "data/tags.json";
+const PAGE_SIZE  = 30;
+const STRIP_HALF = 3; // thumbnails each side of current photo in film strip
 
-const gridEl = document.getElementById("grid");
-const statusEl = document.getElementById("status");
-const sortSelect = document.getElementById("sortSelect");
-const loadMoreBtn = document.getElementById("loadMoreBtn");
-
-// Sidebar / drawer
-const sidebarEl = document.getElementById("sidebar");
-const tagMenuEl = document.getElementById("tagMenu");
-const clearTagsBtn = document.getElementById("clearTagsBtn");
-const menuBtn = document.getElementById("menuBtn");
-const drawerBackdrop = document.getElementById("drawerBackdrop");
-
-// AND/OR
-const modeAndBtn = document.getElementById("modeAnd");
-const modeOrBtn = document.getElementById("modeOr");
-let filterMode = "AND"; // OR
-let selectedTags = new Set(); // multi-select
-
-let tagCounts = new Map();
-let sentinelEl = null;
-let observer = null;
-let isInitializing = true;
+// DOM refs
+const statusEl       = document.getElementById("status");
+const gridEl         = document.getElementById("grid");
+const loadMoreBtn    = document.getElementById("loadMoreBtn");
+const sortBtnsEl     = document.getElementById("sortBtns");
+const tagStripEl     = document.getElementById("tagStrip");
+const activeChipsRow = document.getElementById("activeChipsRow");
+const chipsListEl    = document.getElementById("chipsList");
+const modeAndBtn     = document.getElementById("modeAnd");
+const modeOrBtn      = document.getElementById("modeOr");
 
 // Lightbox
-const lightbox = document.getElementById("lightbox");
-const lbImg = document.getElementById("lbImg");
-const lbMeta = document.getElementById("lbMeta");
-const lbClose = document.getElementById("lbClose");
-const lbPrev = document.getElementById("lbPrev");
-const lbNext = document.getElementById("lbNext");
+const lightbox   = document.getElementById("lightbox");
+const lbImg      = document.getElementById("lbImg");
+const lbClose    = document.getElementById("lbClose");
+const lbPrev     = document.getElementById("lbPrev");
+const lbNext     = document.getElementById("lbNext");
+const lbStripEl  = document.getElementById("lbStrip");
+const lbMetaGrid = document.getElementById("lbMetaGrid");
+const lbTagsEl   = document.getElementById("lbTags");
 
-// pagination
-const PAGE_SIZE = 30; // fewer per page since display images are heavier
-let page = 1;
-
-// data
-let allPhotos = [];
-let viewPhotos = [];
-let lbIndex = -1;
+// State
+let allPhotos     = [];
+let viewPhotos    = [];
+let selectedTags  = new Set();
+let filterMode    = "AND";
+let sortMode      = "date_desc";
+let page          = 1;
 let renderedCount = 0;
+let lbIndex       = -1;
+let sentinelEl    = null;
+let observer      = null;
+let isInitializing = true;
+
+// ── Utilities ──────────────────────────────────────────────────
 
 function parseDateTaken(p) {
   const dt = p?.exif?.dateTaken;
@@ -55,7 +52,6 @@ function formatDateReadable(dtStr) {
   if (Number.isNaN(t)) return dtStr;
   return new Date(t).toLocaleString(undefined, {
     year: "numeric", month: "short", day: "2-digit",
-    hour: "2-digit", minute: "2-digit"
   });
 }
 
@@ -74,14 +70,12 @@ function hasAnyTag(photo, tags) {
 function applyFilter(arr) {
   const tags = Array.from(selectedTags);
   if (tags.length === 0) return arr;
-
   if (filterMode === "AND") return arr.filter(p => hasAllTags(p, tags));
   return arr.filter(p => hasAnyTag(p, tags));
 }
 
 function sortPhotos(arr, mode) {
   const copy = [...arr];
-
   if (mode === "random") {
     for (let i = copy.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -89,38 +83,135 @@ function sortPhotos(arr, mode) {
     }
     return copy;
   }
-
   copy.sort((a, b) => {
     const ta = parseDateTaken(a) ?? 0;
     const tb = parseDateTaken(b) ?? 0;
     return mode === "date_asc" ? (ta - tb) : (tb - ta);
   });
-
   return copy;
 }
 
+// ── URL state ──────────────────────────────────────────────────
+
+function getUrlState() {
+  const sp   = new URLSearchParams(window.location.search);
+  const tags = (sp.get("tags") || "").split(",").map(t => t.trim()).filter(Boolean);
+  const mode = (sp.get("mode") || "AND").toUpperCase() === "OR" ? "OR" : "AND";
+  const sortRaw = sp.get("sort") ?? "";
+  const sort = ["date_desc", "date_asc", "random"].includes(sortRaw) ? sortRaw : "date_desc";
+  const p    = Math.max(1, parseInt(sp.get("page") || "1", 10) || 1);
+  return { tags, mode, sort, page: p };
+}
+
+function setUrlState() {
+  const sp = new URLSearchParams();
+  if (selectedTags.size) sp.set("tags", [...selectedTags].join(","));
+  sp.set("mode", filterMode);
+  sp.set("sort", sortMode);
+  sp.set("page", String(page));
+  history.replaceState(null, "", `${window.location.pathname}?${sp.toString()}`);
+}
+
+// ── Sort ───────────────────────────────────────────────────────
+
+function syncSortUI() {
+  sortBtnsEl.querySelectorAll(".sort-btn").forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.sort === sortMode);
+  });
+}
+
+// ── Tag strip ──────────────────────────────────────────────────
+
+function buildTagStrip(tagIndex) {
+  tagStripEl.innerHTML = "";
+
+  const tags = (tagIndex?.tags || [])
+    .slice()
+    .sort((a, b) => (b.count ?? 0) - (a.count ?? 0) || String(a.name).localeCompare(String(b.name)));
+
+  for (const t of tags) {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "tag-pill";
+    btn.dataset.tag = t.name;
+
+    const nameSpan = document.createElement("span");
+    nameSpan.textContent = t.name;
+
+    const countSpan = document.createElement("span");
+    countSpan.className = "pill-count";
+    countSpan.textContent = String(t.count ?? 0);
+
+    btn.append(nameSpan, countSpan);
+
+    btn.addEventListener("click", () => {
+      if (selectedTags.has(t.name)) selectedTags.delete(t.name);
+      else selectedTags.add(t.name);
+      rebuildView();
+    });
+
+    tagStripEl.appendChild(btn);
+  }
+
+  syncTagStripUI();
+}
+
+function syncTagStripUI() {
+  // Sync pill active states
+  tagStripEl.querySelectorAll(".tag-pill").forEach(btn => {
+    btn.classList.toggle("active", selectedTags.has(btn.dataset.tag));
+  });
+
+  // Rebuild chips
+  chipsListEl.innerHTML = "";
+  for (const tag of selectedTags) {
+    const chip = document.createElement("span");
+    chip.className = "chip";
+
+    const label = document.createElement("span");
+    label.textContent = tag;
+
+    const removeBtn = document.createElement("button");
+    removeBtn.type = "button";
+    removeBtn.className = "chip-remove";
+    removeBtn.innerHTML = "&#x2715;";
+    removeBtn.setAttribute("aria-label", `Remove ${tag} filter`);
+    removeBtn.addEventListener("click", () => {
+      selectedTags.delete(tag);
+      rebuildView();
+    });
+
+    chip.append(label, removeBtn);
+    chipsListEl.appendChild(chip);
+  }
+
+  // Show/hide chips row
+  activeChipsRow.classList.toggle("hidden", selectedTags.size === 0);
+
+  // Sync AND/OR buttons
+  modeAndBtn.classList.toggle("active", filterMode === "AND");
+  modeOrBtn.classList.toggle("active", filterMode === "OR");
+}
+
+// ── Grid ───────────────────────────────────────────────────────
+
 function rebuildView({ preservePage = false } = {}) {
   if (!preservePage) page = 1;
-
-  const filtered = applyFilter(allPhotos);
-  viewPhotos = sortPhotos(filtered, sortSelect.value);
-
+  viewPhotos    = sortPhotos(applyFilter(allPhotos), sortMode);
   renderedCount = 0;
   gridEl.innerHTML = "";
-
   render();
-
   if (!isInitializing) setUrlState();
-  syncTagMenuUI();
+  syncTagStripUI();
 }
 
 function render() {
-  const total = viewPhotos.length;
+  const total  = viewPhotos.length;
   const target = Math.min(total, page * PAGE_SIZE);
 
   statusEl.textContent = total === 0
     ? "No photos match your filter."
-    : `Showing ${target} of ${total}`;
+    : `${total} photo${total === 1 ? "" : "s"}`;
 
   if (renderedCount > target) {
     renderedCount = 0;
@@ -136,54 +227,111 @@ function render() {
 
     const img = document.createElement("img");
     img.loading = "lazy";
-
-    // ✅ use display images for crispness
-    img.src = p.paths.display;
-
+    img.src = p.paths.thumb;
     img.alt = p.meta?.title ?? "";
 
-    tile.appendChild(img);
+    // Overlay with tag labels (visible on hover)
+    const overlay = document.createElement("div");
+    overlay.className = "tile-overlay";
+
+    const tagsDiv = document.createElement("div");
+    tagsDiv.className = "tile-tags";
+    for (const tag of (p.tags || []).slice(0, 4)) {
+      const s = document.createElement("span");
+      s.className = "tile-tag";
+      s.textContent = tag;
+      tagsDiv.appendChild(s);
+    }
+
+    overlay.appendChild(tagsDiv);
+    tile.append(img, overlay);
     tile.addEventListener("click", () => openLightbox(i));
     gridEl.appendChild(tile);
   }
 
   renderedCount = target;
-  loadMoreBtn.style.display = renderedCount < total ? "inline-flex" : "none";
+  loadMoreBtn.style.display = renderedCount < total ? "flex" : "none";
+}
+
+// ── Lightbox ───────────────────────────────────────────────────
+
+function buildExposureStr(p) {
+  const parts = [];
+  if (p?.exif?.exposureTime) parts.push(p.exif.exposureTime + "s");
+  if (p?.exif?.fNumber)      parts.push("f/" + p.exif.fNumber);
+  if (p?.exif?.iso)          parts.push("ISO " + p.exif.iso);
+  if (p?.exif?.focalLength)  parts.push(p.exif.focalLength + "mm");
+  return parts.length ? parts.join(" · ") : null;
+}
+
+function buildFilmStrip(centerIndex) {
+  lbStripEl.innerHTML = "";
+
+  const total = viewPhotos.length;
+  const start = Math.max(0, centerIndex - STRIP_HALF);
+  const end   = Math.min(total - 1, centerIndex + STRIP_HALF);
+
+  for (let i = start; i <= end; i++) {
+    const p   = viewPhotos[i];
+    const img = document.createElement("img");
+    img.className = "lb-strip-thumb" + (i === centerIndex ? " active" : "");
+    img.src     = p.paths.thumb;
+    img.alt     = "";
+    img.loading = "lazy";
+    img.dataset.index = String(i);
+    img.addEventListener("click", () => openLightbox(i));
+    lbStripEl.appendChild(img);
+  }
+
+  // Scroll active thumb into view
+  const activeThumb = lbStripEl.querySelector(".active");
+  if (activeThumb) {
+    activeThumb.scrollIntoView({ inline: "center", block: "nearest" });
+  }
 }
 
 function openLightbox(index) {
   lbIndex = index;
-  const p = viewPhotos[lbIndex];
+  const p = viewPhotos[index];
+
   lbImg.src = p.paths.display;
 
-  const date = formatDateReadable(p?.exif?.dateTaken);
-  const camera = p?.exif?.cameraModel || p?.exif?.cameraMake;
-  const lens = p?.exif?.lensModel;
-  const exp = p?.exif?.exposureTime;
-  const fno = p?.exif?.fNumber;
-  const iso = p?.exif?.iso;
-  const fl = p?.exif?.focalLength;
+  buildFilmStrip(index);
 
-  const lines = [];
-  lines.push(`${lbIndex + 1} / ${viewPhotos.length}`);
-  if (date) lines.push(`Date: ${date}`);
-  if (camera) lines.push(`Camera: ${camera}`);
-  if (lens) lines.push(`Lens: ${lens}`);
+  // Metadata cells
+  lbMetaGrid.innerHTML = "";
+  const metaFields = [
+    { key: "Date",     val: formatDateReadable(p?.exif?.dateTaken) },
+    { key: "Camera",   val: p?.exif?.cameraModel || p?.exif?.cameraMake || null },
+    { key: "Lens",     val: p?.exif?.lensModel || null },
+    { key: "Exposure", val: buildExposureStr(p) },
+  ];
+  for (const m of metaFields) {
+    if (!m.val) continue;
+    const cell = document.createElement("div");
+    cell.className = "lb-meta-cell";
+    const key = document.createElement("div");
+    key.className = "lb-meta-key";
+    key.textContent = m.key;
+    const val = document.createElement("div");
+    val.className = "lb-meta-val";
+    val.textContent = m.val;
+    cell.append(key, val);
+    lbMetaGrid.appendChild(cell);
+  }
 
-  const settings = [];
-  if (exp) settings.push(`Shutter: ${exp}`);
-  if (fno) settings.push(`Aperture: ${fno}`);
-  if (iso) settings.push(`ISO: ${iso}`);
-  if (fl) settings.push(`Focal: ${fl}`);
-  if (settings.length) lines.push(settings.join(" • "));
-
-  const tags = (p?.tags || []).join(", ");
-  if (tags) lines.push(`Tags: ${tags}`);
-
-  lbMeta.textContent = lines.join("\n");
+  // Tags — gold tint if tag matches an active filter
+  lbTagsEl.innerHTML = "";
+  for (const tag of (p?.tags || [])) {
+    const span = document.createElement("span");
+    span.className = "lb-tag" + (selectedTags.has(tag) ? " filter-match" : "");
+    span.textContent = tag;
+    lbTagsEl.appendChild(span);
+  }
 
   lightbox.classList.remove("hidden");
   lightbox.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
 }
 
 function closeLightbox() {
@@ -191,6 +339,7 @@ function closeLightbox() {
   lightbox.setAttribute("aria-hidden", "true");
   lbImg.src = "";
   lbIndex = -1;
+  document.body.style.overflow = "";
 }
 
 function lbStep(dir) {
@@ -200,293 +349,141 @@ function lbStep(dir) {
   openLightbox(next);
 }
 
-function isMobileLike() {
-  return window.matchMedia && window.matchMedia("(max-width: 700px)").matches;
-}
+// ── Swipe support ──────────────────────────────────────────────
 
-/* Swipe support (lightbox) */
-let swipeStartX = 0;
-let swipeStartY = 0;
-let swipeActive = false;
+let swipeStartX = 0, swipeStartY = 0, swipeActive = false;
 
 function onLbTouchStart(e) {
   if (!e.touches || e.touches.length !== 1) return;
-  const t = e.touches[0];
-  swipeStartX = t.clientX;
-  swipeStartY = t.clientY;
+  swipeStartX = e.touches[0].clientX;
+  swipeStartY = e.touches[0].clientY;
   swipeActive = true;
 }
 
 function onLbTouchMove(e) {
   if (!swipeActive || !e.touches || e.touches.length !== 1) return;
-  const t = e.touches[0];
-  const dx = Math.abs(t.clientX - swipeStartX);
-  const dy = Math.abs(t.clientY - swipeStartY);
+  const dx = Math.abs(e.touches[0].clientX - swipeStartX);
+  const dy = Math.abs(e.touches[0].clientY - swipeStartY);
   if (dx > dy && dx > 10) e.preventDefault();
 }
 
 function onLbTouchEnd(e) {
   if (!swipeActive) return;
   swipeActive = false;
-
-  const changed = e.changedTouches && e.changedTouches[0];
+  const changed = e.changedTouches?.[0];
   if (!changed) return;
-
   const dx = changed.clientX - swipeStartX;
   const dy = changed.clientY - swipeStartY;
-
   if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy)) return;
-
-  if (dx < 0) lbStep(1);
-  else lbStep(-1);
+  lbStep(dx < 0 ? 1 : -1);
 }
 
 function onKey(e) {
   if (lightbox.classList.contains("hidden")) return;
-  if (e.key === "Escape") closeLightbox();
-  if (e.key === "ArrowLeft") lbStep(-1);
+  if (e.key === "Escape")     closeLightbox();
+  if (e.key === "ArrowLeft")  lbStep(-1);
   if (e.key === "ArrowRight") lbStep(1);
 }
 
-/* Tag menu (multi-select) */
-function buildTagMenu(tagIndex) {
-  tagMenuEl.innerHTML = "";
+// ── Infinite scroll ────────────────────────────────────────────
 
-  const tags = (tagIndex?.tags || [])
-    .slice()
-    .sort((a, b) => (b.count ?? 0) - (a.count ?? 0) || String(a.name).localeCompare(String(b.name)));
-
-  for (const t of tags) {
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "tagitem";
-    btn.dataset.tag = t.name;
-
-    const left = document.createElement("span");
-    left.textContent = t.name;
-
-    const right = document.createElement("span");
-    right.className = "tagcount";
-    right.textContent = String(t.count ?? 0);
-
-    btn.appendChild(left);
-    btn.appendChild(right);
-
-    btn.addEventListener("click", () => {
-      if (selectedTags.has(t.name)) selectedTags.delete(t.name);
-      else selectedTags.add(t.name);
-
-      rebuildView();
-    });
-
-    tagMenuEl.appendChild(btn);
-  }
-
-  syncTagMenuUI();
-}
-
-function syncTagMenuUI() {
-  tagMenuEl.querySelectorAll(".tagitem").forEach(el => {
-    const tag = el.dataset.tag;
-    el.classList.toggle("active", selectedTags.has(tag));
-  });
-}
-
-/* URL state: ?tags=a,b&mode=AND&sort=...&page=... */
-function getUrlState() {
-  const sp = new URLSearchParams(window.location.search);
-
-  const tagsRaw = sp.get("tags") || "";
-  const tags = tagsRaw.split(",").map(t => t.trim()).filter(Boolean);
-
-  const mode = (sp.get("mode") || "AND").toUpperCase() === "OR" ? "OR" : "AND";
-  const sort = sp.get("sort") || "date_desc";
-
-  const pageParam = parseInt(sp.get("page") || "1", 10);
-  const p = Number.isFinite(pageParam) && pageParam > 0 ? pageParam : 1;
-
-  return { tags, mode, sort, page: p };
-}
-
-function setUrlState() {
-  const sp = new URLSearchParams(window.location.search);
-
-  const tagsArr = Array.from(selectedTags);
-  if (tagsArr.length) sp.set("tags", tagsArr.join(","));
-  else sp.delete("tags");
-
-  sp.set("mode", filterMode);
-  sp.set("sort", sortSelect.value);
-  sp.set("page", String(page));
-
-  history.replaceState(null, "", `${window.location.pathname}?${sp.toString()}`);
-}
-
-/* Infinite scroll */
 function ensureInfiniteScroll() {
   if (!sentinelEl) {
     sentinelEl = document.createElement("div");
-    sentinelEl.id = "scrollSentinel";
-    sentinelEl.style.height = "1px";
-    sentinelEl.style.width = "100%";
-    sentinelEl.style.margin = "1px 0";
+    sentinelEl.style.cssText = "height:1px;width:100%;";
     gridEl.after(sentinelEl);
   }
 
   if (observer) observer.disconnect();
 
-  observer = new IntersectionObserver(
-    (entries) => {
-      const e = entries[0];
-      if (!e || !e.isIntersecting) return;
-
-      const total = viewPhotos.length;
-      const showing = Math.min(total, page * PAGE_SIZE);
-
-      if (showing < total) {
-        page += 1;
-        render();
-        if (!isInitializing) setUrlState();
-      }
-    },
-    { root: null, rootMargin: "1200px 0px", threshold: 0.01 }
-  );
+  observer = new IntersectionObserver(entries => {
+    if (!entries[0]?.isIntersecting) return;
+    if (renderedCount < viewPhotos.length) {
+      page += 1;
+      render();
+      if (!isInitializing) setUrlState();
+    }
+  }, { rootMargin: "1200px 0px", threshold: 0.01 });
 
   observer.observe(sentinelEl);
 }
 
-/* Mobile drawer */
-function isDrawerMobile() {
-  return window.matchMedia && window.matchMedia("(max-width: 860px)").matches;
-}
-
-function openDrawer() {
-  sidebarEl.classList.add("open");
-  drawerBackdrop.classList.remove("hidden");
-  drawerBackdrop.setAttribute("aria-hidden", "false");
-  menuBtn?.setAttribute("aria-expanded", "true");
-}
-
-function closeDrawer() {
-  sidebarEl.classList.remove("open");
-  drawerBackdrop.classList.add("hidden");
-  drawerBackdrop.setAttribute("aria-hidden", "true");
-  menuBtn?.setAttribute("aria-expanded", "false");
-}
-
-function toggleDrawer() {
-  if (sidebarEl.classList.contains("open")) closeDrawer();
-  else openDrawer();
-}
+// ── Init ───────────────────────────────────────────────────────
 
 async function init() {
   try {
     const [photosRes, tagsRes] = await Promise.all([
       fetch(PHOTOS_URL, { cache: "no-cache" }),
-      fetch(TAGS_URL, { cache: "no-cache" }).catch(() => null),
+      fetch(TAGS_URL,   { cache: "no-cache" }).catch(() => null),
     ]);
 
-    if (!photosRes.ok) throw new Error(`Failed photos.json: ${photosRes.status}`);
+    if (!photosRes.ok) throw new Error(`photos.json: ${photosRes.status}`);
     const photosData = await photosRes.json();
     allPhotos = Array.isArray(photosData.photos) ? photosData.photos : [];
 
     let tagIndex = null;
-    if (tagsRes && tagsRes.ok) {
+    if (tagsRes?.ok) {
       tagIndex = await tagsRes.json();
     } else {
+      // Derive tag counts from photos if tags.json unavailable
       const counts = {};
-      for (const p of allPhotos) {
-        for (const t of (p.tags || [])) counts[t] = (counts[t] || 0) + 1;
-      }
+      for (const p of allPhotos)
+        for (const t of (p.tags || []))
+          counts[t] = (counts[t] || 0) + 1;
       tagIndex = { tags: Object.keys(counts).sort().map(k => ({ name: k, count: counts[k] })) };
     }
 
-    tagCounts = new Map((tagIndex.tags || []).map(t => [t.name, t.count ?? 0]));
-    buildTagMenu(tagIndex);
+    buildTagStrip(tagIndex);
 
-    const urlState = getUrlState();
+    const url    = getUrlState();
+    sortMode     = url.sort;
+    filterMode   = url.mode;
+    selectedTags = new Set(url.tags);
+    page         = url.page;
 
-    if (urlState.sort) sortSelect.value = urlState.sort;
-
-    filterMode = urlState.mode;
-    if (filterMode === "AND") {
-      modeAndBtn.classList.add("active");
-      modeOrBtn.classList.remove("active");
-    } else {
-      modeOrBtn.classList.add("active");
-      modeAndBtn.classList.remove("active");
-    }
-
-    selectedTags = new Set(urlState.tags);
-    syncTagMenuUI();
-
-    page = urlState.page;
-
+    syncSortUI();
+    syncTagStripUI();
     ensureInfiniteScroll();
 
-    sortSelect.addEventListener("change", () => rebuildView());
-
-    clearTagsBtn.addEventListener("click", () => {
-      selectedTags.clear();
+    // Sort buttons
+    sortBtnsEl.addEventListener("click", e => {
+      const btn = e.target.closest(".sort-btn");
+      if (!btn) return;
+      sortMode = btn.dataset.sort;
+      syncSortUI();
       rebuildView();
     });
 
+    // AND / OR
     modeAndBtn.addEventListener("click", () => {
       filterMode = "AND";
-      modeAndBtn.classList.add("active");
-      modeOrBtn.classList.remove("active");
       rebuildView();
     });
-
     modeOrBtn.addEventListener("click", () => {
       filterMode = "OR";
-      modeOrBtn.classList.add("active");
-      modeAndBtn.classList.remove("active");
       rebuildView();
     });
 
+    // Load more button
     loadMoreBtn.addEventListener("click", () => {
       page += 1;
       render();
       if (!isInitializing) setUrlState();
     });
 
-    // drawer events
-    menuBtn?.addEventListener("click", toggleDrawer);
-    drawerBackdrop.addEventListener("click", closeDrawer);
-
-    // lightbox events
+    // Lightbox controls
     lbClose.addEventListener("click", closeLightbox);
     lbPrev.addEventListener("click", () => lbStep(-1));
     lbNext.addEventListener("click", () => lbStep(1));
 
-    // Swipe support on mobile
+    // Swipe
     lightbox.addEventListener("touchstart", onLbTouchStart, { passive: true });
-    lightbox.addEventListener("touchmove", onLbTouchMove, { passive: false });
-    lightbox.addEventListener("touchend", onLbTouchEnd, { passive: true });
+    lightbox.addEventListener("touchmove",  onLbTouchMove,  { passive: false });
+    lightbox.addEventListener("touchend",   onLbTouchEnd,   { passive: true });
 
-    // backdrop closes + tap zones navigate
-    lightbox.addEventListener("click", (e) => {
-      if (lightbox.classList.contains("hidden")) return;
-
-      if (e.target === lightbox) {
-        closeLightbox();
-        return;
-      }
-
-      if (!isMobileLike()) return;
-
-      const el = e.target;
-      if (el.closest && (el.closest(".lb-close") || el.closest(".lb-meta"))) return;
-
-      const center = document.querySelector(".lb-center");
-      if (!center || !center.contains(el)) return;
-
-      const x = e.clientX;
-      const w = window.innerWidth;
-
-      if (x < w * 0.35) lbStep(-1);
-      else if (x > w * 0.65) lbStep(1);
+    // Click backdrop to close
+    lightbox.addEventListener("click", e => {
+      if (e.target === lightbox) closeLightbox();
     });
 
     document.addEventListener("keydown", onKey);
@@ -494,6 +491,7 @@ async function init() {
     isInitializing = false;
     rebuildView({ preservePage: true });
     setUrlState();
+
   } catch (err) {
     statusEl.textContent = "Failed to load gallery data.";
     console.error(err);

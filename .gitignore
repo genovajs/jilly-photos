@@ -1,0 +1,13 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Backups created by tools
+data/*.bak.*
+
+# Design mockups (local only)
+mockups/
+
+# macOS
+.DS_Store

@@ -2,96 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dhananjay Narayanan — Gallery</title>
-  <link rel="stylesheet" href="css/styles.css?v=11" />
+  <title>Redirecting…</title>
+  <script>
+    // Preserve any query string (filters, sort, page) when redirecting
+    window.location.replace("index.html" + window.location.search);
+  </script>
 </head>
-<body>
-
-  <!-- Mobile top bar -->
-  <header class="m-topbar">
-    <button id="menuBtn" class="m-menu" aria-label="Open menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-    <div class="m-title">Dhananjay Narayanan</div>
-  </header>
-
-  <!-- Sidebar (desktop) / Drawer (mobile) -->
-  <aside id="sidebar" class="sidebar" aria-label="Sidebar">
-    <div class="side-inner">
-      <div class="side-title">Dhananjay Narayanan</div>
-
-      <nav class="side-nav">
-        <div class="side-links">
-          <a class="side-link" href="index.html">Home</a>
-          <a class="side-link" href="#" aria-disabled="true">About</a>
-          <a class="side-link" href="#" aria-disabled="true">Contact</a>
-        </div>
-
-        <div class="side-section">
-          <div class="side-section-title">Sort</div>
-          <select id="sortSelect" class="side-select">
-            <option value="date_desc" selected>Date (new → old)</option>
-            <option value="date_asc">Date (old → new)</option>
-            <option value="random">Random</option>
-          </select>
-        </div>
-
-        <div class="side-section">
-          <div class="side-section-title">Match</div>
-          <div class="toggle">
-            <button id="modeAnd" class="togglebtn active" type="button">AND</button>
-            <button id="modeOr" class="togglebtn" type="button">OR</button>
-          </div>
-        </div>
-
-        <div class="side-section">
-          <div class="side-section-head">
-            <div class="side-section-title">Tags</div>
-            <button id="clearTagsBtn" class="clearbtn" type="button">Clear</button>
-          </div>
-
-          <div id="tagMenu" class="tagmenu"></div>
-        </div>
-      </nav>
-    </div>
-  </aside>
-
-  <!-- Mobile drawer backdrop -->
-  <div id="drawerBackdrop" class="drawer-backdrop hidden" aria-hidden="true"></div>
-
-  <!-- Main content -->
-  <main class="main">
-    <div id="status" class="status">Loading…</div>
-    <div id="grid" class="grid"></div>
-
-    <div class="loadmore-wrap">
-      <button id="loadMoreBtn" class="button secondary" type="button">Load more</button>
-    </div>
-  </main>
-
-  <!-- Lightbox -->
-  <div id="lightbox" class="lightbox hidden" aria-hidden="true">
-    <div class="lb-shell" role="dialog" aria-modal="true" aria-label="Image viewer">
-      <div class="lb-top">
-        <button id="lbClose" class="lb-close" aria-label="Close">×</button>
-      </div>
-
-      <div class="lb-body">
-        <button id="lbPrev" class="lb-nav lb-prev" aria-label="Previous">‹</button>
-
-        <div class="lb-center">
-          <div class="lb-imgwrap">
-            <img id="lbImg" class="lb-img" alt="" />
-          </div>
-          <div id="lbMeta" class="lb-meta"></div>
-        </div>
-
-        <button id="lbNext" class="lb-nav lb-next" aria-label="Next">›</button>
-      </div>
-    </div>
-  </div>
-
-  <script src="js/app.js"></script>
-</body>
+<body></body>
 </html>

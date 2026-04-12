@@ -3,17 +3,84 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Photo Gallery</title>
-  <link rel="stylesheet" href="css/styles.css" />
+  <title>Dhananjay Narayanan — Photography</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css?v=12" />
 </head>
 <body>
-  <main class="container">
-    <h1 class="title">Photo Gallery</h1>
-    <p class="subtitle">A lightweight gallery hosted on GitHub Pages.</p>
 
-    <div class="card">
-      <a class="button" href="gallery.html">Open gallery →</a>
+  <!-- Top bar -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <span class="site-title">Dhananjay Narayanan</span>
+      <span class="site-sub">Photography</span>
+    </div>
+    <div class="topbar-right">
+      <div class="sort-btns" id="sortBtns">
+        <button class="sort-btn active" data-sort="date_desc" type="button">Newest</button>
+        <button class="sort-btn" data-sort="date_asc" type="button">Oldest</button>
+        <button class="sort-btn" data-sort="random" type="button">Random</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Tag strip -->
+  <div class="tag-strip-bar">
+    <div class="tag-strip-row">
+      <span class="tag-strip-label">Tags</span>
+      <div class="tag-strip" id="tagStrip"></div>
+    </div>
+    <div class="active-chips-row hidden" id="activeChipsRow">
+      <span class="chips-label">Filtering</span>
+      <div class="chips-list" id="chipsList"></div>
+      <div class="filter-mode-btns">
+        <button class="fm-btn active" id="modeAnd" type="button">AND</button>
+        <button class="fm-btn" id="modeOr" type="button">OR</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gallery grid -->
+  <main class="main">
+    <div id="status" class="status"></div>
+    <div id="grid" class="grid"></div>
+    <div class="loadmore-wrap">
+      <button id="loadMoreBtn" class="loadmore-btn" type="button">Load more</button>
     </div>
   </main>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox hidden" aria-hidden="true">
+    <div class="lb-shell" role="dialog" aria-modal="true" aria-label="Image viewer">
+
+      <!-- Film strip + close -->
+      <div class="lb-strip-bar">
+        <div class="lb-strip" id="lbStrip"></div>
+        <button class="lb-close" id="lbClose" aria-label="Close">&#x2715;</button>
+      </div>
+
+      <!-- Image + prev/next -->
+      <div class="lb-body">
+        <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous">&#8249;</button>
+        <div class="lb-center">
+          <div class="lb-imgwrap">
+            <img id="lbImg" class="lb-img" alt="" />
+          </div>
+        </div>
+        <button class="lb-nav lb-next" id="lbNext" aria-label="Next">&#8250;</button>
+      </div>
+
+      <!-- Metadata + tags -->
+      <div class="lb-footer">
+        <div class="lb-meta-grid" id="lbMetaGrid"></div>
+        <div class="lb-tags-row" id="lbTags"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
 </body>
 </html>
