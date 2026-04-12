@@ -195,6 +195,27 @@ function syncTagStripUI() {
 
 // ── Grid ───────────────────────────────────────────────────────
 
+function getColCount() {
+  return window.matchMedia("(max-width: 700px)").matches ? 2 : 3;
+}
+
+// Ensure the grid has the right number of .grid-col children; recreates if needed.
+function ensureCols() {
+  const cols   = getColCount();
+  let colEls   = Array.from(gridEl.querySelectorAll(":scope > .grid-col"));
+  if (colEls.length !== cols) {
+    gridEl.innerHTML = "";
+    colEls = [];
+    for (let c = 0; c < cols; c++) {
+      const col = document.createElement("div");
+      col.className = "grid-col";
+      gridEl.appendChild(col);
+      colEls.push(col);
+    }
+  }
+  return colEls;
+}
+
 function rebuildView({ preservePage = false } = {}) {
   if (!preservePage) page = 1;
   viewPhotos    = sortPhotos(applyFilter(allPhotos), sortMode);
@@ -217,6 +238,9 @@ function render() {
     renderedCount = 0;
     gridEl.innerHTML = "";
   }
+
+  const colEls = ensureCols();
+  const cols   = colEls.length;
 
   for (let i = renderedCount; i < target; i++) {
     const p = viewPhotos[i];
@@ -246,7 +270,9 @@ function render() {
     overlay.appendChild(tagsDiv);
     tile.append(img, overlay);
     tile.addEventListener("click", () => openLightbox(i));
-    gridEl.appendChild(tile);
+
+    // Round-robin: photo 0 → col 0, photo 1 → col 1, photo 2 → col 2, photo 3 → col 0 …
+    colEls[i % cols].appendChild(tile);
   }
 
   renderedCount = target;
@@ -487,6 +513,14 @@ async function init() {
     });
 
     document.addEventListener("keydown", onKey);
+
+    // Rebuild grid if viewport crosses the mobile breakpoint (2-col ↔ 3-col)
+    const colMq = window.matchMedia("(max-width: 700px)");
+    colMq.addEventListener("change", () => {
+      renderedCount = 0;
+      gridEl.innerHTML = "";
+      render();
+    });
 
     isInitializing = false;
     rebuildView({ preservePage: true });

@@ -242,15 +242,23 @@ body {
   min-height: 18px;
 }
 
-/* CSS columns masonry — each photo shows at its natural aspect ratio */
+/* Flex-column masonry — round-robin column assignment keeps left-to-right order */
 .grid {
-  columns: 3;
-  column-gap: 6px;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.grid-col {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .tile {
-  break-inside: avoid;
-  margin-bottom: 6px;
+  margin-bottom: 0;
   cursor: pointer;
   position: relative;
   overflow: hidden;
@@ -515,8 +523,8 @@ body {
   .filter-mode-btns { display: none; }
 
   .main { padding: 14px 8px 60px; }
-  .grid { columns: 2; column-gap: 4px; }
-  .tile { margin-bottom: 4px; }
+  .grid { gap: 4px; }
+  .grid-col { gap: 4px; }
 
   /* lightbox mobile */
   .lb-strip-bar { padding: 8px 44px 8px 10px; }
