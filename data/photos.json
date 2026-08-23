@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-22T22:15:00Z",
+  "generatedAt": "2026-08-23T00:13:39Z",
   "photos": [
     {
       "id": "2025-09-20_000036580010",
@@ -36,6 +36,46 @@
       },
       "tags": [
         "color"
+      ]
+    },
+    {
+      "id": "          _000046830026",
+      "source": {
+        "originalFilename": "000046830026.jpg",
+        "hash": "594ddc01308b6a9558e531d0ba66a2086a4ff83ff9814ea5729763791baf37a9",
+        "hashSource": "original",
+        "sizeBytes": 2489225,
+        "mtime": 1759794240,
+        "fingerprint": "size:2489225_mtime:1759794240",
+        "originalPathHint": "/Users/genova/Documents/jilly-website/my-originals/000046830026.jpg",
+        "importedAt": "2026-08-23T00:13:16Z"
+      },
+      "paths": {
+        "thumb": "assets/thumbs/          _000046830026.jpg",
+        "display": "assets/display/          _000046830026.jpg",
+        "original": null
+      },
+      "exif": {
+        "dateTaken": "                   ",
+        "cameraMake": "NORITSU KOKI",
+        "cameraModel": "EZ Controller",
+        "lensModel": null,
+        "exposureTime": null,
+        "fNumber": null,
+        "iso": null,
+        "focalLength": null
+      },
+      "meta": {
+        "title": null,
+        "caption": null,
+        "location": null
+      },
+      "tags": [
+        "color",
+        "1556",
+        "latane",
+        "remy",
+        "leeanne"
       ]
     }
   ]
