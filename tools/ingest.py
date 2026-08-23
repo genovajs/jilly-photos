@@ -469,7 +469,6 @@ TEMPLATE = r"""
       </div>
       <div class="meta">
         <div><b>Original:</b> {{item.original_filename}}</div>
-        <div><b>Date:</b> {{item.exif.get('dateTaken') or '—'}} &nbsp; <b>Camera:</b> {{item.exif.get('cameraModel') or '—'}}</div>
         <div>
           <b>Shutter:</b> {{item.exif.get('exposureTime') or '—'}} &nbsp;
           <b>Aperture:</b> {{item.exif.get('fNumber') or '—'}} &nbsp;
@@ -490,6 +489,18 @@ TEMPLATE = r"""
           </div>
           <div class="prevtags" id="prevTagsText">None yet.</div>
         </div>
+
+        <div class="hint">Auto-detected from EXIF. Edit if wrong, then Save.</div>
+        <label>
+          Date taken
+          <input id="dateTaken" placeholder="e.g., 2024-01-31T14:05:00"
+                 value="{{ item.exif.get('dateTaken') or '' }}"/>
+        </label>
+        <label>
+          Camera model
+          <input id="cameraModel" placeholder="e.g., Leica M6"
+                 value="{{ item.exif.get('cameraModel') or '' }}"/>
+        </label>
 
         <label>
           Tags (space-separated)
@@ -573,7 +584,12 @@ TEMPLATE = r"""
 
   document.getElementById("tagForm").addEventListener("submit", async (e) => {
     e.preventDefault();
-    const payload = { idx, tags: tagsEl.value.trim() };
+    const payload = {
+      idx,
+      tags: tagsEl.value.trim(),
+      dateTaken: document.getElementById("dateTaken").value.trim(),
+      cameraModel: document.getElementById("cameraModel").value.trim()
+    };
     const res = await fetch("/api/save", {
       method: "POST",
       headers: {"Content-Type":"application/json"},
@@ -713,11 +729,20 @@ def create_app(
         tags_str = payload.get("tags", "")
         tags = normalize_tag_list(re.split(r"\s+", tags_str.strip())) if tags_str else []
 
+        # Start from the auto-detected EXIF, then let the user's edits (if any)
+        # override dateTaken / cameraModel. Blank input falls back to the
+        # auto-detected value rather than wiping it out.
+        exif = dict(it.exif)
+        date_taken_in = (payload.get("dateTaken") or "").strip()
+        camera_model_in = (payload.get("cameraModel") or "").strip()
+        exif["dateTaken"] = date_taken_in or exif.get("dateTaken")
+        exif["cameraModel"] = camera_model_in or exif.get("cameraModel")
+
         entry = {
             "id": it.id,
             "source": it.source,
             "paths": {"thumb": it.thumb_rel, "display": it.display_rel, "original": None},
-            "exif": it.exif,
+            "exif": exif,
             "meta": {"title": None, "caption": None, "location": None},
             "tags": tags,
         }
