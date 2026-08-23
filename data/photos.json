@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-23T00:13:39Z",
+  "generatedAt": "2026-08-23T01:27:18Z",
   "photos": [
     {
       "id": "2025-09-20_000036580010",
@@ -77,6 +77,934 @@
         "latane",
         "remy",
         "leeanne"
+      ]
+    },
+    {
+      "id": "          _000046830001",
+      "source": {
+        "originalFilename": "000046830001.jpg",
+        "hash": "c02d5fcc190147fe27fbee85617cd3f615802b42c4aaab4f77ee7ea4b78ddf7a",
+        "hashSource": "original",
+        "sizeBytes": 2677466,
+        "mtime": 1759794240,
+        "fingerprint": "size:2677466_mtime:1759794240",
+        "originalPathHint": "/Users/genova/Documents/jilly-website/my-originals/000046830001.jpg",
+        "importedAt": "2026-08-23T01:23:52Z"
+      },
+      "paths": {
+        "thumb": "assets/thumbs/          _000046830001.jpg",
+        "display": "assets/display/          _000046830001.jpg",
+        "original": null
+      },
+      "exif": {
+        "dateTaken": "                   ",
+        "cameraMake": "NORITSU KOKI",
+        "cameraModel": "Pentax Zoom",
+        "lensModel": null,
+        "exposureTime": null,
+        "fNumber": null,
+        "iso": null,
+        "focalLength": null
+      },
+      "meta": {
+        "title": null,
+        "caption": null,
+        "location": null
+      },
+      "tags": [
+        "color",
+        "christina"
+      ]
+    },
+    {
+      "id": "          _000046830002",
+      "source": {
+        "originalFilename": "000046830002.jpg",
+        "hash": "17b84d3421351dabb278fcb37aecc1f8c1329e9c71ae5e16828dc4b8ac9e02b8",
+        "hashSource": "original",
+        "sizeBytes": 2232618,
+        "mtime": 1759794240,
+        "fingerprint": "size:2232618_mtime:1759794240",
+        "originalPathHint": "/Users/genova/Documents/jilly-website/my-originals/000046830002.jpg",
+        "importedAt": "2026-08-23T01:23:52Z"
+      },
+      "paths": {
+        "thumb": "assets/thumbs/          _000046830002.jpg",
+        "display": "assets/display/          _000046830002.jpg",
+        "original": null
+      },
+      "exif": {
+        "dateTaken": "                   ",
+        "cameraMake": "NORITSU KOKI",
+        "cameraModel": "Pentax Zoom",
+        "lensModel": null,
+        "exposureTime": null,
+        "fNumber": null,
+        "iso": null,
+        "focalLength": null
+      },
+      "meta": {
+        "title": null,
+        "caption": null,
+        "location": null
+      },
+      "tags": [
+        "color"
+      ]
+    },
+    {
+      "id": "          _000046830003",
+      "source": {
+        "originalFilename": "000046830003.jpg",
+        "hash": "711b7b824d5bd697c07b27d1d7834647adf23b47e890659fe6ebcf6b76007821",
+        "hashSource": "original",
+        "sizeBytes": 1798794,
+        "mtime": 1759794240,
+        "fingerprint": "size:1798794_mtime:1759794240",
+        "originalPathHint": "/Users/genova/Documents/jilly-website/my-originals/000046830003.jpg",
+        "importedAt": "2026-08-23T01:23:52Z"
+      },
+      "paths": {
+        "thumb": "assets/thumbs/          _000046830003.jpg",
+        "display": "assets/display/          _000046830003.jpg",
+        "original": null
+      },
+      "exif": {
+        "dateTaken": "                   ",
+        "cameraMake": "NORITSU KOKI",
+        "cameraModel": "Pentax Zoom",
+        "lensModel": null,
+        "exposureTime": null,
+        "fNumber": null,
+        "iso": null,
+        "focalLength": null
+      },
+      "meta": {
+        "title": null,
+        "caption": null,
+        "location": null
+      },
+      "tags": [
+        "color"
+      ]
+    },
+    {
+      "id": "          _000046830004",
+      "source": {
+        "originalFilename": "000046830004.jpg",
+        "hash": "25e212a06c35d1b3550f9551f5894bd5031bb5233acf334987b91469befa4969",
+        "hashSource": "original",
+        "sizeBytes": 2172700,
+        "mtime": 1759794240,
+        "fingerprint": "size:2172700_mtime:1759794240",
+        "originalPathHint": "/Users/genova/Documents/jilly-website/my-originals/000046830004.jpg",
+        "importedAt": "2026-08-23T01:23:52Z"
+      },
+      "paths": {
+        "thumb": "assets/thumbs/          _000046830004.jpg",
+        "display": "assets/display/          _000046830004.jpg",
+        "original": null
+      },
+      "exif": {
+        "dateTaken": "                   ",
+        "cameraMake": "NORITSU KOKI",
+        "cameraModel": "Pentax Zoom",
+        "lensModel": null,
+        "exposureTime": null,
+        "fNumber": null,
+        "iso": null,
+        "focalLength": null
+      },
+      "meta": {
+        "title": null,
+        "caption": null,
+        "location": null
+      },
+      "tags": [
+        "color",
+        "y2k"
+      ]
+    },
+    {
+      "id": "          _000046830005",
+      "source": {
+        "originalFilename": "000046830005.jpg",
+        "hash": "f9820d1aac7cd0eac2bb05ce927b0fd6886bf37f232e63b16f5b000fff9db908",
+        "hashSource": "original",
+        "sizeBytes": 1532703,
+        "mtime": 1759794240,
+        "fingerprint": "size:1532703_mtime:1759794240",
+        "originalPathHint": "/Users/genova/Documents/jilly-website/my-originals/000046830005.jpg",
+        "importedAt": "2026-08-23T01:23:52Z"
+      },
+      "paths": {
+        "thumb": "assets/thumbs/          _000046830005.jpg",
+        "display": "assets/display/          _000046830005.jpg",
+        "original": null
+      },
+      "exif": {
+        "dateTaken": "                   ",
+        "cameraMake": "NORITSU KOKI",
+        "cameraModel": "Pentax Zoom",
+        "lensModel": null,
+        "exposureTime": null,
+        "fNumber": null,
+        "iso": null,
+        "focalLength": null
+      },
+      "meta": {
+        "title": null,
+        "caption": null,
+        "location": null
+      },
+      "tags": [
+        "color"
+      ]
+    },
+    {
+      "id": "          _000046830006",
+      "source": {
+        "originalFilename": "000046830006.jpg",
+        "hash": "ee8c3db1cd89bb8588cbede774bdddc6d21f2f80b0685853af2926e5c5fce2cd",
+        "hashSource": "original",
+        "sizeBytes": 2470255,
+        "mtime": 1759794240,
+        "fingerprint": "size:2470255_mtime:1759794240",
+        "originalPathHint": "/Users/genova/Documents/jilly-website/my-originals/000046830006.jpg",
+        "importedAt": "2026-08-23T01:23:52Z"
+      },
+      "paths": {
+        "thumb": "assets/thumbs/          _000046830006.jpg",
+        "display": "assets/display/          _000046830006.jpg",
+        "original": null
+      },
+      "exif": {
+        "dateTaken": "                   ",
+        "cameraMake": "NORITSU KOKI",
+        "cameraModel": "Pentax Zoom",
+        "lensModel": null,
+        "exposureTime": null,
+        "fNumber": null,
+        "iso": null,
+        "focalLength": null
+      },
+      "meta": {
+        "title": null,
+        "caption": null,
+        "location": null
+      },
+      "tags": [
+        "color"
+      ]
+    },
+    {
+      "id": "          _000046830007",
+      "source": {
+        "originalFilename": "000046830007.jpg",
+        "hash": "408028da7850c0596330ceee930ee36732dd9c42a975d466e9c20ad065154a67",
+        "hashSource": "original",
+        "sizeBytes": 2239496,
+        "mtime": 1759794240,
+        "fingerprint": "size:2239496_mtime:1759794240",
+        "originalPathHint": "/Users/genova/Documents/jilly-website/my-originals/000046830007.jpg",
+        "importedAt": "2026-08-23T01:23:53Z"
+      },
+      "paths": {
+        "thumb": "assets/thumbs/          _000046830007.jpg",
+        "display": "assets/display/          _000046830007.jpg",
+        "original": null
+      },
+      "exif": {
+        "dateTaken": "                   ",
+        "cameraMake": "NORITSU KOKI",
+        "cameraModel": "Pentax Zoom",
+        "lensModel": null,
+        "exposureTime": null,
+        "fNumber": null,
+        "iso": null,
+        "focalLength": null
+      },
+      "meta": {
+        "title": null,
+        "caption": null,
+        "location": null
+      },
+      "tags": [
+        "color",
+        "latane",
+        "y2k"
+      ]
+    },
+    {
+      "id": "          _000046830008",
+      "source": {
+        "originalFilename": "000046830008.jpg",
+        "hash": "701f292cc9d9330f5185bd2b2ac38b210c6e30a2d7f0a05cc2f64c31b9627d5e",
+        "hashSource": "original",
+        "sizeBytes": 2263130,
+        "mtime": 1759779894,
+        "fingerprint": "size:2263130_mtime:1759779894",
+        "originalPathHint": "/Users/genova/Documents/jilly-website/my-originals/000046830008.jpg",
+        "importedAt": "2026-08-23T01:23:53Z"
+      },
+      "paths": {
+        "thumb": "assets/thumbs/          _000046830008.jpg",
+        "display": "assets/display/          _000046830008.jpg",
+        "original": null
+      },
+      "exif": {
+        "dateTaken": "                   ",
+        "cameraMake": "NORITSU KOKI",
+        "cameraModel": "Pentax Zoom",
+        "lensModel": null,
+        "exposureTime": null,
+        "fNumber": null,
+        "iso": null,
+        "focalLength": null
+      },
+      "meta": {
+        "title": null,
+        "caption": null,
+        "location": null
+      },
+      "tags": [
+        "color",
+        "latane",
+        "y2k"
+      ]
+    },
+    {
+      "id": "          _000046830009",
+      "source": {
+        "originalFilename": "000046830009.jpg",
+        "hash": "809ecd3767b22dfb8a7410073acd24abbb0274e620887a62d0ea18620730538f",
+        "hashSource": "original",
+        "sizeBytes": 2576509,
+        "mtime": 1759794240,
+        "fingerprint": "size:2576509_mtime:1759794240",
+        "originalPathHint": "/Users/genova/Documents/jilly-website/my-originals/000046830009.jpg",
+        "importedAt": "2026-08-23T01:23:53Z"
+      },
+      "paths": {
+        "thumb": "assets/thumbs/          _000046830009.jpg",
+        "display": "assets/display/          _000046830009.jpg",
+        "original": null
+      },
+      "exif": {
+        "dateTaken": "                   ",
+        "cameraMake": "NORITSU KOKI",
+        "cameraModel": "Pentax Zoom",
+        "lensModel": null,
+        "exposureTime": null,
+        "fNumber": null,
+        "iso": null,
+        "focalLength": null
+      },
+      "meta": {
+        "title": null,
+        "caption": null,
+        "location": null
+      },
+      "tags": [
+        "color",
+        "latane",
+        "y2k",
+        "jillian"
+      ]
+    },
+    {
+      "id": "          _000046830010",
+      "source": {
+        "originalFilename": "000046830010.jpg",
+        "hash": "052fde07c9c0e39614c048734765398fd0d94f71195ea5a3c230bed2cbed97bd",
+        "hashSource": "original",
+        "sizeBytes": 2463295,
+        "mtime": 1759794240,
+        "fingerprint": "size:2463295_mtime:1759794240",
+        "originalPathHint": "/Users/genova/Documents/jilly-website/my-originals/000046830010.jpg",
+        "importedAt": "2026-08-23T01:23:53Z"
+      },
+      "paths": {
+        "thumb": "assets/thumbs/          _000046830010.jpg",
+        "display": "assets/display/          _000046830010.jpg",
+        "original": null
+      },
+      "exif": {
+        "dateTaken": "                   ",
+        "cameraMake": "NORITSU KOKI",
+        "cameraModel": "Pentax Zoom",
+        "lensModel": null,
+        "exposureTime": null,
+        "fNumber": null,
+        "iso": null,
+        "focalLength": null
+      },
+      "meta": {
+        "title": null,
+        "caption": null,
+        "location": null
+      },
+      "tags": [
+        "color"
+      ]
+    },
+    {
+      "id": "          _000046830011",
+      "source": {
+        "originalFilename": "000046830011.jpg",
+        "hash": "a41eacf9f89fa7c4596b279d95bdf07de1a1e2b0b62dc95c4d4b22468f4978b3",
+        "hashSource": "original",
+        "sizeBytes": 2439471,
+        "mtime": 1759794240,
+        "fingerprint": "size:2439471_mtime:1759794240",
+        "originalPathHint": "/Users/genova/Documents/jilly-website/my-originals/000046830011.jpg",
+        "importedAt": "2026-08-23T01:23:53Z"
+      },
+      "paths": {
+        "thumb": "assets/thumbs/          _000046830011.jpg",
+        "display": "assets/display/          _000046830011.jpg",
+        "original": null
+      },
+      "exif": {
+        "dateTaken": "                   ",
+        "cameraMake": "NORITSU KOKI",
+        "cameraModel": "Pentax Zoom",
+        "lensModel": null,
+        "exposureTime": null,
+        "fNumber": null,
+        "iso": null,
+        "focalLength": null
+      },
+      "meta": {
+        "title": null,
+        "caption": null,
+        "location": null
+      },
+      "tags": [
+        "color",
+        "y2k",
+        "latane"
+      ]
+    },
+    {
+      "id": "          _000046830012",
+      "source": {
+        "originalFilename": "000046830012.jpg",
+        "hash": "71cc6fcf48b9f651fa89e49cd98f341a3a7eaff5102452c46dbfbc1443cc1351",
+        "hashSource": "original",
+        "sizeBytes": 1711798,
+        "mtime": 1759779904,
+        "fingerprint": "size:1711798_mtime:1759779904",
+        "originalPathHint": "/Users/genova/Documents/jilly-website/my-originals/000046830012.jpg",
+        "importedAt": "2026-08-23T01:23:53Z"
+      },
+      "paths": {
+        "thumb": "assets/thumbs/          _000046830012.jpg",
+        "display": "assets/display/          _000046830012.jpg",
+        "original": null
+      },
+      "exif": {
+        "dateTaken": "                   ",
+        "cameraMake": "NORITSU KOKI",
+        "cameraModel": "Pentax Zoom",
+        "lensModel": null,
+        "exposureTime": null,
+        "fNumber": null,
+        "iso": null,
+        "focalLength": null
+      },
+      "meta": {
+        "title": null,
+        "caption": null,
+        "location": null
+      },
+      "tags": [
+        "color",
+        "y2k",
+        "latane"
+      ]
+    },
+    {
+      "id": "          _000046830013",
+      "source": {
+        "originalFilename": "000046830013.jpg",
+        "hash": "67b92a2da7303bda64a3e96533637aff72577d4892eccd680e08b73b16f153bd",
+        "hashSource": "original",
+        "sizeBytes": 2450818,
+        "mtime": 1759794240,
+        "fingerprint": "size:2450818_mtime:1759794240",
+        "originalPathHint": "/Users/genova/Documents/jilly-website/my-originals/000046830013.jpg",
+        "importedAt": "2026-08-23T01:23:53Z"
+      },
+      "paths": {
+        "thumb": "assets/thumbs/          _000046830013.jpg",
+        "display": "assets/display/          _000046830013.jpg",
+        "original": null
+      },
+      "exif": {
+        "dateTaken": "                   ",
+        "cameraMake": "NORITSU KOKI",
+        "cameraModel": "Pentax Zoom",
+        "lensModel": null,
+        "exposureTime": null,
+        "fNumber": null,
+        "iso": null,
+        "focalLength": null
+      },
+      "meta": {
+        "title": null,
+        "caption": null,
+        "location": null
+      },
+      "tags": [
+        "color"
+      ]
+    },
+    {
+      "id": "          _000046830014",
+      "source": {
+        "originalFilename": "000046830014.jpg",
+        "hash": "ea8d45f10317a52064e1370096cbe259f338664330fac72ccafa449c73e56c00",
+        "hashSource": "original",
+        "sizeBytes": 2375961,
+        "mtime": 1759794240,
+        "fingerprint": "size:2375961_mtime:1759794240",
+        "originalPathHint": "/Users/genova/Documents/jilly-website/my-originals/000046830014.jpg",
+        "importedAt": "2026-08-23T01:23:53Z"
+      },
+      "paths": {
+        "thumb": "assets/thumbs/          _000046830014.jpg",
+        "display": "assets/display/          _000046830014.jpg",
+        "original": null
+      },
+      "exif": {
+        "dateTaken": "                   ",
+        "cameraMake": "NORITSU KOKI",
+        "cameraModel": "Pentax Zoom",
+        "lensModel": null,
+        "exposureTime": null,
+        "fNumber": null,
+        "iso": null,
+        "focalLength": null
+      },
+      "meta": {
+        "title": null,
+        "caption": null,
+        "location": null
+      },
+      "tags": [
+        "color"
+      ]
+    },
+    {
+      "id": "          _000046830015",
+      "source": {
+        "originalFilename": "000046830015.jpg",
+        "hash": "05b80f214c1f4d1bb8f01af4ce03444377016b5aea1d3df350548e01f3a6f4fc",
+        "hashSource": "original",
+        "sizeBytes": 2377174,
+        "mtime": 1759794240,
+        "fingerprint": "size:2377174_mtime:1759794240",
+        "originalPathHint": "/Users/genova/Documents/jilly-website/my-originals/000046830015.jpg",
+        "importedAt": "2026-08-23T01:23:54Z"
+      },
+      "paths": {
+        "thumb": "assets/thumbs/          _000046830015.jpg",
+        "display": "assets/display/          _000046830015.jpg",
+        "original": null
+      },
+      "exif": {
+        "dateTaken": "                   ",
+        "cameraMake": "NORITSU KOKI",
+        "cameraModel": "Pentax Zoom",
+        "lensModel": null,
+        "exposureTime": null,
+        "fNumber": null,
+        "iso": null,
+        "focalLength": null
+      },
+      "meta": {
+        "title": null,
+        "caption": null,
+        "location": null
+      },
+      "tags": [
+        "color",
+        "latane",
+        "remy",
+        "luke"
+      ]
+    },
+    {
+      "id": "          _000046830016",
+      "source": {
+        "originalFilename": "000046830016.jpg",
+        "hash": "310c05f90c7ea7da99a58573b093f2bfba3fc1c5be1687e9127525c214324d4c",
+        "hashSource": "original",
+        "sizeBytes": 2948167,
+        "mtime": 1759794240,
+        "fingerprint": "size:2948167_mtime:1759794240",
+        "originalPathHint": "/Users/genova/Documents/jilly-website/my-originals/000046830016.jpg",
+        "importedAt": "2026-08-23T01:23:54Z"
+      },
+      "paths": {
+        "thumb": "assets/thumbs/          _000046830016.jpg",
+        "display": "assets/display/          _000046830016.jpg",
+        "original": null
+      },
+      "exif": {
+        "dateTaken": "                   ",
+        "cameraMake": "NORITSU KOKI",
+        "cameraModel": "Pentax Zoom",
+        "lensModel": null,
+        "exposureTime": null,
+        "fNumber": null,
+        "iso": null,
+        "focalLength": null
+      },
+      "meta": {
+        "title": null,
+        "caption": null,
+        "location": null
+      },
+      "tags": [
+        "color"
+      ]
+    },
+    {
+      "id": "          _000046830017",
+      "source": {
+        "originalFilename": "000046830017.jpg",
+        "hash": "2d6e02ecb5db59f24b92a53e8bcf1728b806c8a43320cb315eac1234c9aa7f4d",
+        "hashSource": "original",
+        "sizeBytes": 2637314,
+        "mtime": 1759794240,
+        "fingerprint": "size:2637314_mtime:1759794240",
+        "originalPathHint": "/Users/genova/Documents/jilly-website/my-originals/000046830017.jpg",
+        "importedAt": "2026-08-23T01:23:54Z"
+      },
+      "paths": {
+        "thumb": "assets/thumbs/          _000046830017.jpg",
+        "display": "assets/display/          _000046830017.jpg",
+        "original": null
+      },
+      "exif": {
+        "dateTaken": "                   ",
+        "cameraMake": "NORITSU KOKI",
+        "cameraModel": "Pentax Zoom",
+        "lensModel": null,
+        "exposureTime": null,
+        "fNumber": null,
+        "iso": null,
+        "focalLength": null
+      },
+      "meta": {
+        "title": null,
+        "caption": null,
+        "location": null
+      },
+      "tags": [
+        "color"
+      ]
+    },
+    {
+      "id": "          _000046830018",
+      "source": {
+        "originalFilename": "000046830018.jpg",
+        "hash": "f9750446e7e3d6b9dfceb46ccb36f34856f9fb9c8a200351cbe87af123098e65",
+        "hashSource": "original",
+        "sizeBytes": 3466557,
+        "mtime": 1759794240,
+        "fingerprint": "size:3466557_mtime:1759794240",
+        "originalPathHint": "/Users/genova/Documents/jilly-website/my-originals/000046830018.jpg",
+        "importedAt": "2026-08-23T01:23:54Z"
+      },
+      "paths": {
+        "thumb": "assets/thumbs/          _000046830018.jpg",
+        "display": "assets/display/          _000046830018.jpg",
+        "original": null
+      },
+      "exif": {
+        "dateTaken": "                   ",
+        "cameraMake": "NORITSU KOKI",
+        "cameraModel": "Pentax Zoom",
+        "lensModel": null,
+        "exposureTime": null,
+        "fNumber": null,
+        "iso": null,
+        "focalLength": null
+      },
+      "meta": {
+        "title": null,
+        "caption": null,
+        "location": null
+      },
+      "tags": [
+        "color"
+      ]
+    },
+    {
+      "id": "          _000046830019",
+      "source": {
+        "originalFilename": "000046830019.jpg",
+        "hash": "0085152c7464fef772e4ee8091590d3dd5cbefb0e0a389cfbfb00d54b3cb7637",
+        "hashSource": "original",
+        "sizeBytes": 2439684,
+        "mtime": 1759794240,
+        "fingerprint": "size:2439684_mtime:1759794240",
+        "originalPathHint": "/Users/genova/Documents/jilly-website/my-originals/000046830019.jpg",
+        "importedAt": "2026-08-23T01:23:54Z"
+      },
+      "paths": {
+        "thumb": "assets/thumbs/          _000046830019.jpg",
+        "display": "assets/display/          _000046830019.jpg",
+        "original": null
+      },
+      "exif": {
+        "dateTaken": "                   ",
+        "cameraMake": "NORITSU KOKI",
+        "cameraModel": "Pentax Zoom",
+        "lensModel": null,
+        "exposureTime": null,
+        "fNumber": null,
+        "iso": null,
+        "focalLength": null
+      },
+      "meta": {
+        "title": null,
+        "caption": null,
+        "location": null
+      },
+      "tags": [
+        "1556",
+        "latane",
+        "remy",
+        "y2k",
+        "luke",
+        "leeanne",
+        "color"
+      ]
+    },
+    {
+      "id": "          _000046830020",
+      "source": {
+        "originalFilename": "000046830020.jpg",
+        "hash": "1c9c07262a6654dc160152b3472074f0778ea76ba4232f74e52b3986a246d8d3",
+        "hashSource": "original",
+        "sizeBytes": 2596834,
+        "mtime": 1759794240,
+        "fingerprint": "size:2596834_mtime:1759794240",
+        "originalPathHint": "/Users/genova/Documents/jilly-website/my-originals/000046830020.jpg",
+        "importedAt": "2026-08-23T01:23:54Z"
+      },
+      "paths": {
+        "thumb": "assets/thumbs/          _000046830020.jpg",
+        "display": "assets/display/          _000046830020.jpg",
+        "original": null
+      },
+      "exif": {
+        "dateTaken": "                   ",
+        "cameraMake": "NORITSU KOKI",
+        "cameraModel": "Pentax Zoom",
+        "lensModel": null,
+        "exposureTime": null,
+        "fNumber": null,
+        "iso": null,
+        "focalLength": null
+      },
+      "meta": {
+        "title": null,
+        "caption": null,
+        "location": null
+      },
+      "tags": [
+        "color",
+        "mag"
+      ]
+    },
+    {
+      "id": "          _000046830021",
+      "source": {
+        "originalFilename": "000046830021.jpg",
+        "hash": "d0c41c7a0d1ce5abfff24d28755d327d9fe19e74fb8390ec13d1ecf5e55fa939",
+        "hashSource": "original",
+        "sizeBytes": 2605579,
+        "mtime": 1759794240,
+        "fingerprint": "size:2605579_mtime:1759794240",
+        "originalPathHint": "/Users/genova/Documents/jilly-website/my-originals/000046830021.jpg",
+        "importedAt": "2026-08-23T01:23:54Z"
+      },
+      "paths": {
+        "thumb": "assets/thumbs/          _000046830021.jpg",
+        "display": "assets/display/          _000046830021.jpg",
+        "original": null
+      },
+      "exif": {
+        "dateTaken": "                   ",
+        "cameraMake": "NORITSU KOKI",
+        "cameraModel": "Pentax Zoom",
+        "lensModel": null,
+        "exposureTime": null,
+        "fNumber": null,
+        "iso": null,
+        "focalLength": null
+      },
+      "meta": {
+        "title": null,
+        "caption": null,
+        "location": null
+      },
+      "tags": [
+        "color",
+        "mag"
+      ]
+    },
+    {
+      "id": "          _000046830022",
+      "source": {
+        "originalFilename": "000046830022.jpg",
+        "hash": "77dae813bf0b62830f87fc17fe76d6ec1c0c2053fe18299552617e3815017ee2",
+        "hashSource": "original",
+        "sizeBytes": 1605311,
+        "mtime": 1759794240,
+        "fingerprint": "size:1605311_mtime:1759794240",
+        "originalPathHint": "/Users/genova/Documents/jilly-website/my-originals/000046830022.jpg",
+        "importedAt": "2026-08-23T01:23:54Z"
+      },
+      "paths": {
+        "thumb": "assets/thumbs/          _000046830022.jpg",
+        "display": "assets/display/          _000046830022.jpg",
+        "original": null
+      },
+      "exif": {
+        "dateTaken": "                   ",
+        "cameraMake": "NORITSU KOKI",
+        "cameraModel": "Pentax Zoom",
+        "lensModel": null,
+        "exposureTime": null,
+        "fNumber": null,
+        "iso": null,
+        "focalLength": null
+      },
+      "meta": {
+        "title": null,
+        "caption": null,
+        "location": null
+      },
+      "tags": [
+        "color",
+        "latane"
+      ]
+    },
+    {
+      "id": "          _000046830023",
+      "source": {
+        "originalFilename": "000046830023.jpg",
+        "hash": "863eea479dd7d85fde8e3811047d236f763cd19d5cbaeb71f9ddb5438cfbe58d",
+        "hashSource": "original",
+        "sizeBytes": 2283458,
+        "mtime": 1759779949,
+        "fingerprint": "size:2283458_mtime:1759779949",
+        "originalPathHint": "/Users/genova/Documents/jilly-website/my-originals/000046830023.jpg",
+        "importedAt": "2026-08-23T01:23:55Z"
+      },
+      "paths": {
+        "thumb": "assets/thumbs/          _000046830023.jpg",
+        "display": "assets/display/          _000046830023.jpg",
+        "original": null
+      },
+      "exif": {
+        "dateTaken": "                   ",
+        "cameraMake": "NORITSU KOKI",
+        "cameraModel": "Pentax Zoom",
+        "lensModel": null,
+        "exposureTime": null,
+        "fNumber": null,
+        "iso": null,
+        "focalLength": null
+      },
+      "meta": {
+        "title": null,
+        "caption": null,
+        "location": null
+      },
+      "tags": [
+        "color"
+      ]
+    },
+    {
+      "id": "          _000046830024",
+      "source": {
+        "originalFilename": "000046830024.jpg",
+        "hash": "0015e16d2c5ef6d5c196f53e0532093d93c018e585d50caa7644106bf48ac6f0",
+        "hashSource": "original",
+        "sizeBytes": 2560814,
+        "mtime": 1759794240,
+        "fingerprint": "size:2560814_mtime:1759794240",
+        "originalPathHint": "/Users/genova/Documents/jilly-website/my-originals/000046830024.jpg",
+        "importedAt": "2026-08-23T01:23:55Z"
+      },
+      "paths": {
+        "thumb": "assets/thumbs/          _000046830024.jpg",
+        "display": "assets/display/          _000046830024.jpg",
+        "original": null
+      },
+      "exif": {
+        "dateTaken": "                   ",
+        "cameraMake": "NORITSU KOKI",
+        "cameraModel": "Pentax Zoom",
+        "lensModel": null,
+        "exposureTime": null,
+        "fNumber": null,
+        "iso": null,
+        "focalLength": null
+      },
+      "meta": {
+        "title": null,
+        "caption": null,
+        "location": null
+      },
+      "tags": [
+        "color"
+      ]
+    },
+    {
+      "id": "          _000046830025",
+      "source": {
+        "originalFilename": "000046830025.jpg",
+        "hash": "f85facd7c5c31c2e5959a871babc9474897102d34412d049efc9be7c482ca1b5",
+        "hashSource": "original",
+        "sizeBytes": 2489428,
+        "mtime": 1759794240,
+        "fingerprint": "size:2489428_mtime:1759794240",
+        "originalPathHint": "/Users/genova/Documents/jilly-website/my-originals/000046830025.jpg",
+        "importedAt": "2026-08-23T01:23:55Z"
+      },
+      "paths": {
+        "thumb": "assets/thumbs/          _000046830025.jpg",
+        "display": "assets/display/          _000046830025.jpg",
+        "original": null
+      },
+      "exif": {
+        "dateTaken": "                   ",
+        "cameraMake": "NORITSU KOKI",
+        "cameraModel": "Pentax Zoom",
+        "lensModel": null,
+        "exposureTime": null,
+        "fNumber": null,
+        "iso": null,
+        "focalLength": null
+      },
+      "meta": {
+        "title": null,
+        "caption": null,
+        "location": null
+      },
+      "tags": [
+        "1556",
+        "color",
+        "luke",
+        "y2k"
       ]
     }
   ]
